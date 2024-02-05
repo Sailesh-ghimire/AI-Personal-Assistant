@@ -5,6 +5,8 @@ import torch
 import numpy as np 
 from NeuralNetwork import bag_of_words, tokenize, stem
 from Brain import NeuralNet
+import matplotlib.pyplot as plt
+
 
 with open("intents.json",'r') as f:
     intents = json.load(f)
@@ -74,32 +76,129 @@ model = NeuralNet(input_size,hidden_size,output_size).to(device=device)
 criterion = nn.CrossEntropyLoss()
 optimizer = torch.optim.Adam(model.parameters(),lr=learning_rate)
 
+
+training_loss_values = []
+training_accuracy_values = []
+
+
+# for epoch in range(num_epochs):
+#     for (words,labels)  in train_loader:
+#         words = words.to(device)
+#         labels = labels.to(dtype=torch.long).to(device)
+#         outputs = model(words)
+#         loss = criterion(outputs,labels)
+#         optimizer.zero_grad()
+#         loss.backward()
+#         optimizer.step()
+
+#     if (epoch+1) % 100 ==0:
+#         print(f'Epoch [{epoch+1}/{num_epochs}], Loss: {loss.item():.4f}')
+
+# print(f'Final Loss : {loss.item():.4f}')
+
+
+
+
+# correct = 0
+# total = 0
+
+# with torch.no_grad():
+#     for (words, labels) in train_loader:
+#         words = words.to(device)
+#         labels = labels.to(dtype=torch.long).to(device)
+#         outputs = model(words)
+#         probabilities = torch.nn.functional.softmax(outputs, dim=1)
+#         _, predicted = torch.max(probabilities, 1)
+#         total += labels.size(0)
+#         correct += (predicted == labels).sum().item()
+
+# accuracy = correct / total
+# print(f'Training Accuracy: {accuracy:.4f}')
+
+
+
+# data = {
+# "model_state":model.state_dict(),
+# "input_size":input_size,
+# "hidden_size":hidden_size,
+# "output_size":output_size,
+# "all_words":all_words,
+# "tags":tags
+# }
+
+# FILE = "TrainData.pth"
+# torch.save(data,FILE)
+
+# print(f"Training Complete, File Saved To {FILE}")
+# print("             ")
+
 for epoch in range(num_epochs):
-    for (words,labels)  in train_loader:
+    for (words, labels) in train_loader:
         words = words.to(device)
         labels = labels.to(dtype=torch.long).to(device)
         outputs = model(words)
-        loss = criterion(outputs,labels)
+        loss = criterion(outputs, labels)
         optimizer.zero_grad()
         loss.backward()
         optimizer.step()
 
-    if (epoch+1) % 100 ==0:
+    if (epoch+1) % 100 == 0:
         print(f'Epoch [{epoch+1}/{num_epochs}], Loss: {loss.item():.4f}')
 
-print(f'Final Loss : {loss.item():.4f}')
+    # Calculate training accuracy
+    correct = 0
+    total = 0
 
+    with torch.no_grad():
+        for (words, labels) in train_loader:
+            words = words.to(device)
+            labels = labels.to(dtype=torch.long).to(device)
+            outputs = model(words)
+            probabilities = torch.nn.functional.softmax(outputs, dim=1)
+            _, predicted = torch.max(probabilities, 1)
+            total += labels.size(0)
+            correct += (predicted == labels).sum().item()
+
+    accuracy = correct / total
+
+    # Append values for plotting
+    training_loss_values.append(loss.item())
+    training_accuracy_values.append(accuracy)
+
+    if (epoch+1) % 100 == 0:
+        print(f'Training Accuracy: {accuracy:.4f}')
+
+# Save the model
 data = {
-"model_state":model.state_dict(),
-"input_size":input_size,
-"hidden_size":hidden_size,
-"output_size":output_size,
-"all_words":all_words,
-"tags":tags
+    "model_state": model.state_dict(),
+    "input_size": input_size,
+    "hidden_size": hidden_size,
+    "output_size": output_size,
+    "all_words": all_words,
+    "tags": tags
 }
 
 FILE = "TrainData.pth"
-torch.save(data,FILE)
+torch.save(data, FILE)
 
 print(f"Training Complete, File Saved To {FILE}")
 print("             ")
+
+# Plotting the training loss and accuracy
+plt.figure(figsize=(10, 5))
+plt.subplot(1, 2, 1)
+plt.plot(training_loss_values, label='Training Loss')
+plt.title('Training Loss over Epochs')
+plt.xlabel('Epochs')
+plt.ylabel('Loss')
+plt.legend()
+
+plt.subplot(1, 2, 2)
+plt.plot(training_accuracy_values, label='Training Accuracy')
+plt.title('Training Accuracy over Epochs')
+plt.xlabel('Epochs')
+plt.ylabel('Accuracy')
+plt.legend()
+
+plt.tight_layout()
+plt.show()

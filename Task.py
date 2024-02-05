@@ -1,5 +1,6 @@
 import datetime
 from Speak import Say
+import webbrowser
 
 
 def Time():
@@ -38,4 +39,10 @@ def InputExecution(tag,query):
         import pywhatkit
         pywhatkit.search(query)
 
+    
 
+
+    elif "youtube" in tag.lower():
+        Say("opening Youtube sir...")
+        webbrowser.open("https://youtube.com")
+        

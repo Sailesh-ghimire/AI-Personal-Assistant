@@ -68,8 +68,12 @@ def Main():
 
                 elif "google" in reply:
                     InputExecution(reply, result)
+
+                elif "youtube" in reply:
+                    InputExecution(reply, result)
+
                 else:
                     Say(reply)
 
 while True:
-    
+    Main()

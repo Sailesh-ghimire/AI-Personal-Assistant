@@ -50,6 +50,14 @@
             ],
             "responses":["google"
         ]
+        },
+        {
+            "tag":"youtube",
+            "patterns":["youtube search", "youtube "
+            ],
+            "responses":["youtube"
+        ]
         }
+        
     ]
 }
