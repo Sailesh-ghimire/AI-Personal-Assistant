@@ -11,7 +11,7 @@ def Listen():
 
     try:
         print("Recognizing...")
-        query = r.recognize_google(audio, language = "ne-in")
+        query = r.recognize_google(audio, language = "en")
         print(f"you said:{query}")
 
     except:
