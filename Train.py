@@ -49,6 +49,13 @@ input_size = len(x_train[0])
 hidden_size = 8
 output_size = len(tags)
 
+# num_epochs = 800
+# batch_size = 16
+# learning_rate = 0.001
+# input_size = len(x_train[0])
+# hidden_size = 16
+# output_size = len(tags)
+
 print(">> Training The Chats Module :- Conciousness ")
 
 class ChatDataset(Dataset):
@@ -79,58 +86,6 @@ optimizer = torch.optim.Adam(model.parameters(),lr=learning_rate)
 
 training_loss_values = []
 training_accuracy_values = []
-
-
-# for epoch in range(num_epochs):
-#     for (words,labels)  in train_loader:
-#         words = words.to(device)
-#         labels = labels.to(dtype=torch.long).to(device)
-#         outputs = model(words)
-#         loss = criterion(outputs,labels)
-#         optimizer.zero_grad()
-#         loss.backward()
-#         optimizer.step()
-
-#     if (epoch+1) % 100 ==0:
-#         print(f'Epoch [{epoch+1}/{num_epochs}], Loss: {loss.item():.4f}')
-
-# print(f'Final Loss : {loss.item():.4f}')
-
-
-
-
-# correct = 0
-# total = 0
-
-# with torch.no_grad():
-#     for (words, labels) in train_loader:
-#         words = words.to(device)
-#         labels = labels.to(dtype=torch.long).to(device)
-#         outputs = model(words)
-#         probabilities = torch.nn.functional.softmax(outputs, dim=1)
-#         _, predicted = torch.max(probabilities, 1)
-#         total += labels.size(0)
-#         correct += (predicted == labels).sum().item()
-
-# accuracy = correct / total
-# print(f'Training Accuracy: {accuracy:.4f}')
-
-
-
-# data = {
-# "model_state":model.state_dict(),
-# "input_size":input_size,
-# "hidden_size":hidden_size,
-# "output_size":output_size,
-# "all_words":all_words,
-# "tags":tags
-# }
-
-# FILE = "TrainData.pth"
-# torch.save(data,FILE)
-
-# print(f"Training Complete, File Saved To {FILE}")
-# print("             ")
 
 for epoch in range(num_epochs):
     for (words, labels) in train_loader:

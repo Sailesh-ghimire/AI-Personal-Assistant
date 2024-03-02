@@ -4,7 +4,7 @@ import webbrowser
 from googlesearch import search
 from bs4 import BeautifulSoup
 import requests
-
+import subprocess
 
 
 def Time():
@@ -17,6 +17,15 @@ def Date():
 
 def OpenYouTube():
     webbrowser.open("https://www.youtube.com")
+
+def OpenCommandPrompt():
+    subprocess.run(["cmd.exe"], shell=True)
+
+def OpenMicrosoftWord():
+    subprocess.run(["start", "winword"], shell=True)
+
+def OpenVSCode():
+    subprocess.run(["code"], shell=True)
 
 def GetTemperature(place):
     try:
@@ -37,6 +46,8 @@ def GetTemperature(place):
         print(f"Error fetching temperature: {e}")
         Say(f"Sorry, I couldn't find the temperature for {place}")
 
+
+
 def NonInputExecution(query):
 
     query = str(query).lower()
@@ -49,11 +60,18 @@ def NonInputExecution(query):
     
     elif "youtube" in query:
         OpenYouTube()
+
+    if "command prompt" in query:
+        OpenCommandPrompt()
+
+    elif "word" in query:
+        OpenMicrosoftWord()
+
+    elif "vs code" in query:
+        OpenVSCode()
     
     
-
-
-
+    
 
 
 def InputExecution(tag,query):
@@ -75,6 +93,7 @@ def InputExecution(tag,query):
         place = query.replace("temperature", "").strip()
         GetTemperature(place)
 
+   
 
 
            

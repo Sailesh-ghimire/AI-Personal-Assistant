@@ -17,46 +17,85 @@
             ]
         },
         {
+            "tag": "abstraction",
+            "patterns": [
+                "Explain data abstraction.",
+                "What is data abstraction?",
+                "Define data abstraction."
+            ],
+            "responses": [
+                "Data abstraction is a technique used in computer programming to separate the implementation details of a data type from its interface, allowing the implementation to be changed without affecting the code that uses it. This is often achieved through the use of abstract data types (ADTs), which are defined by the operations they support rather than their specific implementation, or through the use of interfaces and classes in object-oriented programming languages. Data abstraction helps to reduce the complexity of software systems by allowing code to be written in a modular and flexible way and by hiding the underlying details of data types from the user."
+            ]
+        },
+        {
             "tag":"bye",
             "patterns":["bye", "goodbye","see you later","exit"
             ],
             "responses":["okay bye","goodbye","see you later"
-        ]
+            ]
+        },
+        {
+            "tag":"send email",
+            "patterns":["I want to send email", "send email"
+            ],
+            "responses":["send email"
+            ]
         },
         {
             "tag":"time",
             "patterns":["what is time", "time","what's the time"
             ],
             "responses":["time"
-        ]
+            ]
         },
         {
             "tag":"temperature",
             "patterns":["what is temperature", "temperature","what's the temperature"
             ],
             "responses":["temperature"
-        ]
+            ]
+        },
+        {
+            "tag":"command prompt",
+            "patterns":["open command prompt", "command prompt"
+            ],
+            "responses":["command prompt"
+            ]
+        },
+        {
+            "tag":"word",
+            "patterns":["open word", "word"
+            ],
+            "responses":["word"
+            ]
+        },
+        {
+            "tag":"vs code",
+            "patterns":["open vs code", "vs code"
+            ],
+            "responses":["vs code"
+            ]
         },
         {
             "tag":"date",
             "patterns":["what is the date today", "date","what's the date"
             ],
             "responses":["date"
-        ]
+            ]
         },
         {
             "tag":"wikipedia",
             "patterns":["who is", "about ","what is", "wikipedia", "where is"
             ],
             "responses":["wikipedia"
-        ]
+            ]
         },
         {
             "tag":"google",
             "patterns":["google search", "search ","google"
             ],
             "responses":["google"
-        ]
+            ]
         },
         {
             "tag": "greeting",
@@ -83,7 +122,7 @@
             "patterns":["youtube search", "youtube ","open youtube "
             ],
             "responses":["youtube"
-        ]
+            ]
         }
         
     ]
