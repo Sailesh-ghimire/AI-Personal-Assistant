@@ -8,7 +8,7 @@ from Brain import NeuralNet
 import matplotlib.pyplot as plt
 
 
-with open("intents.json",'r') as f:
+with open("intents.json",'r', encoding="utf-8") as f:
     intents = json.load(f)
 
 all_words = []
@@ -82,6 +82,8 @@ device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 model = NeuralNet(input_size,hidden_size,output_size).to(device=device)
 criterion = nn.CrossEntropyLoss()
 optimizer = torch.optim.Adam(model.parameters(),lr=learning_rate)
+# optimizer = torch.optim.Adam(model.parameters(), lr=learning_rate, weight_decay=1e-5)
+
 
 
 training_loss_values = []
@@ -140,20 +142,20 @@ print(f"Training Complete, File Saved To {FILE}")
 print("             ")
 
 # Plotting the training loss and accuracy
-# plt.figure(figsize=(10, 5))
-# plt.subplot(1, 2, 1)
-# plt.plot(training_loss_values, label='Training Loss')
-# plt.title('Training Loss over Epochs')
-# plt.xlabel('Epochs')
-# plt.ylabel('Loss')
-# plt.legend()
+plt.figure(figsize=(10, 5))
+plt.subplot(1, 2, 1)
+plt.plot(training_loss_values, label='Training Loss')
+plt.title('Training Loss over Epochs')
+plt.xlabel('Epochs')
+plt.ylabel('Loss')
+plt.legend()
 
-# plt.subplot(1, 2, 2)
-# plt.plot(training_accuracy_values, label='Training Accuracy')
-# plt.title('Training Accuracy over Epochs')
-# plt.xlabel('Epochs')
-# plt.ylabel('Accuracy')
-# plt.legend()
+plt.subplot(1, 2, 2)
+plt.plot(training_accuracy_values, label='Training Accuracy')
+plt.title('Training Accuracy over Epochs')
+plt.xlabel('Epochs')
+plt.ylabel('Accuracy')
+plt.legend()
 
-# plt.tight_layout()
-# plt.show()
+plt.tight_layout()
+plt.show()
