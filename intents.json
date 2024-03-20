@@ -57,14 +57,14 @@
             ]
         },
         {
-            "tag": "find",
+            "tag": "explain",
             "patterns": [
-                "find",
-                "find the",
-                "find me"
+                "explain",
+                "explain the",
+                "explain meaning of"
             ],
             "responses": [
-                "find"
+                "explain"
             ]
         },
         {

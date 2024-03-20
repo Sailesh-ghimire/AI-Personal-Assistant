@@ -88,13 +88,16 @@ def Main():
                     reply = random.choice(intent["responses"])
 
                     if "time" in reply:
-                        NonInputExecution(reply)
+                        time = NonInputExecution(reply)
+                        response['output'] = time
 
                     elif "date" in reply:
-                        NonInputExecution(reply)
+                        date = NonInputExecution(reply)
+                        response['output'] = date
 
                     elif "wikipedia" in reply:
-                        InputExecution(reply, sentence)
+                        output = InputExecution(reply, sentence)
+                        response['output'] = output
 
                     elif "google" in reply:
                         InputExecution(reply, result)
@@ -103,16 +106,20 @@ def Main():
                         NonInputExecution(reply)
 
                     elif "temperature" in reply:
-                        InputExecution(reply, result)
+                        output = InputExecution(reply, result)
+                        response['output'] = output
 
-                    elif "find" in reply:
-                        InputExecution(reply, result)
+                    elif "explain" in reply:
+                        output = InputExecution(reply, result)
+                        response['output'] = output
 
 
                     elif "command prompt" in reply:
                         NonInputExecution(reply)
+                        
                     elif "word" in reply:
                         NonInputExecution(reply)
+
                     elif "vs code" in reply:
                         NonInputExecution(reply)
 
@@ -130,4 +137,3 @@ if __name__ == "__main__":
     os.system('start msedge.exe --app="http://localhost:8000/index.html"')
 
     eel.start('index.html', mode=None, host='localhost', block=True)
-
